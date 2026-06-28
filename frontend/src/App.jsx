@@ -26,7 +26,7 @@ function App() {
     try {
 
       const response = await axios.get(
-        "http://127.0.0.1:8000/companies"
+        "https://ai-career-prep-assistant.onrender.com/companies"
       );
 
       const companyNames = Object.keys(response.data);
@@ -64,7 +64,7 @@ function App() {
       );
 
       const response = await axios.post(
-        "http://127.0.0.1:8000/upload-resume",
+        "https://ai-career-prep-assistant.onrender.com/upload-resume",
         formData,
         {
           headers: {
@@ -106,7 +106,7 @@ alert(
       .filter((skill) => skill !== "");
 
     const response = await axios.post(
-      "http://127.0.0.1:8000/generate-ai-roadmap",
+      "https://ai-career-prep-assistant.onrender.com/generate-ai-roadmap",
       {
         company: company,
         skills: skillsList
@@ -140,7 +140,7 @@ alert(
     try {
 
       await axios.post(
-        "http://127.0.0.1:8000/save-progress",
+        "https://ai-career-prep-assistant.onrender.com/save-progress",
         {
           company: company,
           skill: skill,
