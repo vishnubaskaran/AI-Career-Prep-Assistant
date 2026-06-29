@@ -1,40 +1,48 @@
-import sqlite3
+from postgres_db import get_connection
 
 
 def create_database():
 
-    connection = sqlite3.connect("placement.db")
+    connection = get_connection()
 
     cursor = connection.cursor()
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS progress (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            id SERIAL PRIMARY KEY,
             company TEXT,
             skill TEXT,
-            completed INTEGER
+            completed BOOLEAN
         )
     """)
 
     connection.commit()
 
-    print("✅ Database and progress table created successfully!")
+    cursor.close()
 
     connection.close()
+
+    print("✅ PostgreSQL database initialized!")
 
 
 def save_progress(company, skill, completed):
 
-    connection = sqlite3.connect("placement.db")
+    connection = get_connection()
 
     cursor = connection.cursor()
 
-    cursor.execute("""
-        INSERT INTO progress (company, skill, completed)
-        VALUES (?, ?, ?)
-    """, (company, skill, completed))
+    cursor.execute(
+        """
+        INSERT INTO progress
+        (company, skill, completed)
+        VALUES (%s, %s, %s)
+        """,
+        (company, skill, completed)
+    )
 
     connection.commit()
+
+    cursor.close()
 
     connection.close()
 

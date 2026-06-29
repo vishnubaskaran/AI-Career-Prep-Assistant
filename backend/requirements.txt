@@ -5,3 +5,5 @@ pydantic
 google-generativeai
 PyPDF2
 python-dotenv
+psycopg2-binary
+sqlalchemy
